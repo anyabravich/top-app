@@ -1,3 +1,9 @@
+import { Htag } from "../components";
+
 export default function Home() {
-  return <>Hello</>;
+  return (
+    <>
+      <Htag tag="h1">Hello, World</Htag>
+    </>
+  );
 }
