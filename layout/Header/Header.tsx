@@ -3,5 +3,5 @@ import styles from "./Header.module.scss";
 import cn from "classnames";
 
 export const Header = ({ ...props }: HeaderProps) => (
-  <div {...props}>Header</div>
+  <header {...props}>Header</header>
 );
