@@ -1,5 +1,6 @@
 import { Button, Htag } from "../components";
 import { P } from "../components/P/P";
+import { Tag } from "../components/Tag/Tag";
 
 export default function Home() {
   return (
@@ -22,6 +23,10 @@ export default function Home() {
         маркетологами. Выпускники факультета могут успешно конкурировать с
         веб-дизайнерами уровня middle.
       </P>
+      <Tag color="green">-10 000 ₽</Tag>
+      <Tag color="primary" href="https://github.com/">
+        Работа в Photoshop
+      </Tag>
     </>
   );
 }
