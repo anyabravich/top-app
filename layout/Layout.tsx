@@ -2,8 +2,9 @@ import { Footer } from "./Footer/Footer";
 import { Header } from "./Header/Header";
 import { LayoutProps } from "./Layout.props";
 import { Sidebar } from "./Sidebar/Sidebar";
+import React, { FunctionComponent } from "react";
 
-export const Layout = ({ children }: LayoutProps) => (
+const Layout = ({ children }: LayoutProps) => (
   <>
     <Header />
     <div>
@@ -13,3 +14,15 @@ export const Layout = ({ children }: LayoutProps) => (
     <Footer />
   </>
 );
+
+export const withLayout = <T extends Record<string, unknown>>(
+  Component: FunctionComponent<T>
+) => {
+  return function withLayoutComponent(props: T) {
+    return (
+      <Layout>
+        <Component {...props} />
+      </Layout>
+    );
+  };
+};
