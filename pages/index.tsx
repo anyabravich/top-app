@@ -32,11 +32,6 @@ function Home({ menu }: HomeProps) {
         Работа в Photoshop
       </Tag>
       <Rating rating={rating} setRating={setRating} isEditable={true} />
-      <ul>
-        {menu.map((m, index) => (
-          <li key={index}>{m._id.secondCategory}</li>
-        ))}
-      </ul>
     </>
   );
 }
