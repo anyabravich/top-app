@@ -1,10 +1,10 @@
 import { SidebarProps } from "./Sidebar.props";
-import styles from "./Sidebar.module.scss";
-import cn from "classnames";
 import { Menu } from "../Menu/Menu";
+import { Search } from "../../components/Search/Search";
 
 export const Sidebar = ({ ...props }: SidebarProps) => (
   <div {...props}>
+    <Search />
     <Menu />
   </div>
 );
