@@ -8,8 +8,8 @@
     "description description description description description description description description"
     "feature feature feature feature advBlock advBlock advBlock advBlock"
     "actions actions actions actions actions actions actions actions";
-  margin-bottom: 50px;
   padding: 30px;
+  margin-bottom: 50px;
 }
 
 .logo {
@@ -65,12 +65,9 @@
 
 .actions {
   grid-area: actions;
-  margin: 20px 0 50px;
+  margin: 20px 0 0;
   padding-top: 22px;
   border-top: 1px solid #ebebeb;
-  @media screen and (max-width: 480px) {
-    margin-bottom: 20px;
-  }
 }
 
 .feature {
@@ -172,8 +169,11 @@
 
 .reviews {
   overflow: hidden;
-
   padding: 30px;
+  margin-bottom: 50px;
+  margin-top: -60px;
+  display: grid;
+  gap: 20px;
 }
 
 .rateTitle a {
@@ -312,4 +312,12 @@
       "hr2"
       "actions";
   }
+}
+
+.opened {
+  display: grid;
+}
+
+.closed {
+  display: none;
 }

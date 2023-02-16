@@ -4,13 +4,16 @@ import cn from "classnames";
 import { Card } from "../Card/Card";
 import { Rating } from "../Rating/Rating";
 import { Tag } from "../Tag/Tag";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Divider } from "../Divider/Divider";
 import { Button } from "../Button/Button";
 import Image from "next/image";
 import { declOfNum, priceRu } from "../../helpers/helpers";
+import { Review } from "../Review/Review";
 
 export const Product = ({ product, className, ...props }: ProductProps) => {
+  const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
+
   return (
     <div className={className} {...props}>
       <Card className={styles.product} data-product>
@@ -88,15 +91,35 @@ export const Product = ({ product, className, ...props }: ProductProps) => {
         </div>
         <div className={styles.actions}>
           <Button appearance="primary">Узнать подробнее</Button>
-          <Button
-            appearance="ghost"
-            className={styles.reviewButton}
-            arrow="right"
-          >
-            Читать отзывы
-          </Button>
+          {product.reviews.length > 0 && (
+            <Button
+              appearance="ghost"
+              className={styles.reviewButton}
+              arrow={isReviewOpened ? "down" : "right"}
+              onClick={() => setIsReviewOpened(!isReviewOpened)}
+              aria-expanded={isReviewOpened}
+            >
+              Читать отзывы
+            </Button>
+          )}
         </div>
       </Card>
+      {product.reviews.length > 0 && (
+        <Card
+          color="blue"
+          className={cn(styles.reviews, {
+            [styles.opened]: isReviewOpened,
+            [styles.closed]: !isReviewOpened,
+          })}
+        >
+          {product.reviews.map((r) => (
+            <>
+              <Review review={r} key={r._id} />
+              <Divider />
+            </>
+          ))}
+        </Card>
+      )}
     </div>
   );
 };
