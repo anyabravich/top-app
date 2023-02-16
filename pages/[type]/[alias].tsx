@@ -50,25 +50,36 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
       notFound: true,
     };
   }
-  const { data: menu } = await axios.post<MenuItem[]>(
-    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
-    {
-      firstCategory: firstCategoryItem.id,
+  try {
+    const { data: menu } = await axios.post<MenuItem[]>(
+      process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
+      {
+        firstCategory: firstCategoryItem.id,
+      }
+    );
+    if (menu.length === 0) {
+      return {
+        notFound: true,
+      };
     }
-  );
-  const { data: page } = await axios.get<TopPageModel>(
-    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/byAlias/" + params.alias
-  );
-  const { data: products } = await axios.post<ProductModel[]>(
-    process.env.NEXT_PUBLIC_DOMAIN + "/api/product/find",
-    {
-      category: page.category,
-      limit: 10,
-    }
-  );
-  return {
-    props: { menu, firstCategory: firstCategoryItem.id, page, products },
-  };
+    const { data: page } = await axios.get<TopPageModel>(
+      process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/byAlias/" + params.alias
+    );
+    const { data: products } = await axios.post<ProductModel[]>(
+      process.env.NEXT_PUBLIC_DOMAIN + "/api/product/find",
+      {
+        category: page.category,
+        limit: 10,
+      }
+    );
+    return {
+      props: { menu, firstCategory: firstCategoryItem.id, page, products },
+    };
+  } catch (err) {
+    return {
+      notFound: true,
+    };
+  }
 };
 
 interface CourseProps extends Record<string, unknown> {
