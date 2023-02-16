@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import { useState } from "react";
-import { Button, Htag, P, Rating, Tag } from "../components";
+import { Button, Htag, P, Rating, Tag, Input, Textarea } from "../components";
 import { withLayout } from "../layout/Layout";
 import axios from "axios";
 import { MenuItem } from "../interfaces/menu.interface";
@@ -8,7 +8,7 @@ import { MenuItem } from "../interfaces/menu.interface";
 function Home({ menu }: HomeProps) {
   const [rating, setRating] = useState<number>(4);
   return (
-    <>
+    <div className="components">
       <Htag tag="h1">Hello, World</Htag>
       <Button
         appearance="primary"
@@ -32,7 +32,9 @@ function Home({ menu }: HomeProps) {
         Работа в Photoshop
       </Tag>
       <Rating rating={rating} setRating={setRating} isEditable={true} />
-    </>
+      <Input placeholder="текст" />
+      <Textarea placeholder="текст ареа" />
+    </div>
   );
 }
 
