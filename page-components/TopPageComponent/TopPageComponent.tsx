@@ -7,8 +7,9 @@ import { HhData } from "../../components/HhData/HhData";
 import { Advantages } from "../../components/Advantages/Advantages";
 import { Sort } from "../../components/Sort/Sort";
 import { SortEnum } from "../../components/Sort/Sort.props";
-import { useReducer } from "react";
-import { SortReducer } from "./sort.reducer";
+import { useEffect, useReducer } from "react";
+import { sortReducer } from "./sort.reducer";
+import { useReducedMotion } from "framer-motion";
 
 export const TopPageComponent = ({
   page,
@@ -16,18 +17,21 @@ export const TopPageComponent = ({
   firstCategory,
 }: TopPageComponentProps) => {
   const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(
-    SortReducer,
+    sortReducer,
     {
       products,
       sort: SortEnum.Rating,
     }
   );
+  const shouldReduceMotion = useReducedMotion();
 
   const setSort = (sort: SortEnum) => {
-    dispatchSort({
-      type: sort,
-    });
+    dispatchSort({ type: sort });
   };
+
+  useEffect(() => {
+    dispatchSort({ type: "reset", initialState: products });
+  }, [products]);
 
   return (
     <div className={styles.wrapper}>
@@ -42,7 +46,14 @@ export const TopPageComponent = ({
       </div>
       <div role="list">
         {sortedProducts &&
-          sortedProducts.map((p) => <Product key={p._id} product={p} />)}
+          sortedProducts.map((p) => (
+            <Product
+              role="listitem"
+              layout={shouldReduceMotion ? false : true}
+              key={p._id}
+              product={p}
+            />
+          ))}
       </div>
       <div className={styles.hhTitle}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>

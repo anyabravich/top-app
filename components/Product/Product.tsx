@@ -4,14 +4,20 @@ import cn from "classnames";
 import { Card } from "../Card/Card";
 import { Rating } from "../Rating/Rating";
 import { Tag } from "../Tag/Tag";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Divider } from "../Divider/Divider";
 import { Button } from "../Button/Button";
 import Image from "next/image";
 import { declOfNum, priceRu } from "../../helpers/helpers";
 import { Review } from "../Review/Review";
+import { ReviewForm } from "../ReviewForm/ReviewForm";
 
-export const Product = ({ product, className, ...props }: ProductProps) => {
+export const Product = ({
+  product,
+  className,
+  layout,
+  ...props
+}: ProductProps) => {
   const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
 
   return (
@@ -118,6 +124,7 @@ export const Product = ({ product, className, ...props }: ProductProps) => {
               <Divider />
             </>
           ))}
+          <ReviewForm productId={product._id} />
         </Card>
       )}
     </div>
