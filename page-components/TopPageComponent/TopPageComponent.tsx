@@ -4,6 +4,7 @@ import { TopPageComponentProps } from "./TopPageComponent.props";
 import { Htag, Tag } from "../../components";
 import { TopLevelCategory } from "../../interfaces/page.interface";
 import { HhData } from "../../components/HhData/HhData";
+import { Advantages } from "../../components/Advantages/Advantages";
 
 export const TopPageComponent = ({
   page,
@@ -44,7 +45,7 @@ export const TopPageComponent = ({
       {page.advantages && page.advantages.length > 0 && (
         <>
           <Htag tag="h2">Преимущства</Htag>
-          {/* <Advantages advantages={page.advantages} /> */}
+          <Advantages advantages={page.advantages} />
         </>
       )}
       {page.seoText && (
