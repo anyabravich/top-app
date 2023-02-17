@@ -9,6 +9,7 @@ import { Button } from "../Button/Button";
 
 export const ReviewForm = ({
   className,
+  productId,
   ...props
 }: ReviewFormProps): JSX.Element => {
   return (
