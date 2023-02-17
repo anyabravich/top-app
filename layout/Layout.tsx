@@ -10,7 +10,7 @@ import { Up } from "../components/Up/Up";
 
 const Layout = ({ children }: LayoutProps) => (
   <main className={styles.wrapper}>
-    <Header className={styles.header} />
+    <Header />
     <Sidebar className={styles.sidebar} />
     <div className={styles.body}>{children}</div>
     <Footer className={styles.footer} />
