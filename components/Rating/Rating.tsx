@@ -6,13 +6,13 @@ import React, {
   ForwardedRef,
 } from "react";
 import styles from "./Rating.module.scss";
-import { RatingPage } from "./Rating.props";
+import { RatingProps } from "./Rating.props";
 import cn from "classnames";
 import StarIcon from "./star.svg";
 
 export const Rating = forwardRef(
   (
-    { isEditable = false, rating, setRating, ...props }: RatingPage,
+    { isEditable = false, rating, error, setRating, ...props }: RatingProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
