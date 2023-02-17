@@ -4,7 +4,7 @@ import cn from "classnames";
 import { Card } from "../Card/Card";
 import { Rating } from "../Rating/Rating";
 import { Tag } from "../Tag/Tag";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Divider } from "../Divider/Divider";
 import { Button } from "../Button/Button";
 import Image from "next/image";
@@ -19,6 +19,16 @@ export const Product = ({
   ...props
 }: ProductProps) => {
   const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
+  const reviewRef = useRef<HTMLDivElement>(null);
+
+  const scrollToReview = () => {
+    setIsReviewOpened(true);
+    reviewRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    reviewRef.current?.focus();
+  };
 
   return (
     <div className={className} {...props}>
@@ -68,8 +78,10 @@ export const Product = ({
           в кредит
         </div>
         <div className={styles.rateTitle}>
-          {product.reviewCount}{" "}
-          {declOfNum(product.reviewCount, ["отзыв", "отзыва", "отзывов"])}
+          <a href="#ref" onClick={scrollToReview}>
+            {product.reviewCount}{" "}
+            {declOfNum(product.reviewCount, ["отзыв", "отзыва", "отзывов"])}
+          </a>
         </div>
         <Divider className={styles.hr} />
         <div className={styles.feature}>
@@ -117,6 +129,7 @@ export const Product = ({
             [styles.opened]: isReviewOpened,
             [styles.closed]: !isReviewOpened,
           })}
+          ref={reviewRef}
         >
           {product.reviews.map((r) => (
             <div key={r._id}>
