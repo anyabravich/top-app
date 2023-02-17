@@ -23,6 +23,11 @@ export const Product = motion(
       const reviewRef = useRef<HTMLDivElement>(null);
       const [imageSrc, setImageSrc] = useState("../blank-img.svg");
 
+      const variants = {
+        visible: { opacity: 1, height: "auto" },
+        hidden: { opacity: 0, height: 0 },
+      };
+
       useEffect(() => {
         if (product.image.includes("http")) {
           setImageSrc(product.image);
@@ -33,11 +38,13 @@ export const Product = motion(
 
       const scrollToReview = () => {
         setIsReviewOpened(true);
-        reviewRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-        reviewRef.current?.focus();
+        setTimeout(() => {
+          reviewRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+          reviewRef.current?.focus();
+        }, 100);
       };
 
       return (

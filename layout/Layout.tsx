@@ -6,6 +6,7 @@ import React, { FunctionComponent } from "react";
 import cn from "classnames";
 import styles from "./Layout.module.scss";
 import { AppContextProvider, IAppContext } from "../context/app.context";
+import { Up } from "../components/Up/Up";
 
 const Layout = ({ children }: LayoutProps) => (
   <main className={styles.wrapper}>
@@ -13,6 +14,7 @@ const Layout = ({ children }: LayoutProps) => (
     <Sidebar className={styles.sidebar} />
     <div className={styles.body}>{children}</div>
     <Footer className={styles.footer} />
+    <Up />
   </main>
 );
 
