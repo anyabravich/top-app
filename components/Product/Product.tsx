@@ -4,7 +4,7 @@ import cn from "classnames";
 import { Card } from "../Card/Card";
 import { Rating } from "../Rating/Rating";
 import { Tag } from "../Tag/Tag";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Divider } from "../Divider/Divider";
 import { Button } from "../Button/Button";
 import Image from "next/image";
@@ -20,6 +20,15 @@ export const Product = ({
 }: ProductProps) => {
   const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
   const reviewRef = useRef<HTMLDivElement>(null);
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    if (product.image.includes("http")) {
+      setImageSrc(product.image);
+    } else {
+      setImageSrc(process.env.NEXT_PUBLIC_DOMAIN + product.image);
+    }
+  }, []);
 
   const scrollToReview = () => {
     setIsReviewOpened(true);
@@ -34,12 +43,7 @@ export const Product = ({
     <div className={className} {...props}>
       <Card className={styles.product} data-product>
         <div className={styles.logo}>
-          <Image
-            src={process.env.NEXT_PUBLIC_DOMAIN + product.image}
-            alt={product.title}
-            width={70}
-            height={70}
-          />
+          <Image src={imageSrc} alt={product.title} width={70} height={70} />
         </div>
         <div className={styles.title}>{product.title}</div>
         <div className={styles.price}>

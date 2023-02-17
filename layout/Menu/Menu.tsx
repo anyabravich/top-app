@@ -30,7 +30,7 @@ export const Menu = (): JSX.Element => {
   const variantsChildren = {
     visible: {
       opacity: 1,
-      height: 29,
+      height: "100%",
     },
     hidden: { opacity: shouldReduceMotion ? 1 : 0, height: 0 },
   };
