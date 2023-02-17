@@ -13,6 +13,10 @@ import { TopPageComponent } from "../../page-components";
 import Head from "next/head";
 
 function TopPage({ firstCategory, page, products }: TopPageProps) {
+  if (!page || !products) {
+    // return 404
+  }
+
   return (
     <>
       <Head>
