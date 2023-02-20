@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export const Sidebar = ({ className, ...props }: SidebarProps) => (
   <div className={cn(className, styles.sidebar)} {...props}>
-    <Link href={"/"}>
+    <Link href={"/"} aria-label="логотип">
       <Logo className={styles.logo} />
     </Link>
     <Search />
