@@ -153,6 +153,7 @@ export const Product = motion(
                   [styles.closed]: !isReviewOpened,
                 })}
                 ref={reviewRef}
+                tabIndex={isReviewOpened ? 0 : -1}
               >
                 {product.reviews.map((r) => (
                   <div key={r._id}>
